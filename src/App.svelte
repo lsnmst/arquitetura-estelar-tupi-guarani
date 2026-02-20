@@ -297,7 +297,7 @@
 
     const loader = new GLTFLoader();
     loader.load(
-      "/model/estrelar.glb",
+      import.meta.env.BASE_URL + "model/estrelar.glb",
       (gltf) => {
         const model = gltf.scene;
         model.scale.set(0.04, 0.04, 0.04); // regola scala secondo il modello
