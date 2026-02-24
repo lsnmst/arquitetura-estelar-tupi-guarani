@@ -318,7 +318,7 @@
         celestialSphere = new THREE.Mesh(
             new THREE.SphereGeometry(r, 64, 64),
             new THREE.MeshBasicMaterial({
-                color: 0x6d6965,
+                color: 0x61581a,
                 wireframe: true,
                 opacity: 0.1,
                 transparent: true,

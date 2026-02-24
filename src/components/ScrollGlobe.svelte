@@ -17,21 +17,45 @@
         {
             id: "pata",
             title: "Pata da Ema (Nhandu pysá)",
-            month: "Marzo–Aprile",
+            month: "Março-Abril",
+            arch: "Entre março e abril, a constelação torna-se visível ao entardecer, surgindo progressivamente no quadrante Sudeste. Até cerca das 21h30–22h00 pode ser enquadrada por meio de janela vertical alta orientada a Sul ou Sudeste, permitindo acompanhar sua ascensão. Entre 22h00 e 1h00 atinge maior elevação, podendo ser observada através de pátio interno ou varanda aberta voltada a Sul, favorecendo um enquadramento mais amplo do céu austral.",
+            drawing: [1, 4, 5],
         },
-        { id: "colibri", title: "Colibrì (Mainamy)", month: "Marzo–Aprile" },
+        {
+            id: "colibri",
+            title: "Colibrì (Mainamy)",
+            month: "Março-Abril",
+            arch: "Nos meses de março e abril, a constelação surge no quadrante Leste–Sudeste ao anoitecer, tornando-se visível entre 19h00 e 21h30. Entre 22h00 e 0h00 aproxima-se do meridiano Sul, atingindo maior altura no céu e permitindo enquadramento através de varanda ou abertura orientada a Sul. Após 1h00 desloca-se progressivamente para Oeste–Sudoeste, iniciando sua descida em direção ao horizonte.",
+            drawing: [1, 2, 4],
+        },
         {
             id: "jabuti",
             title: "Jabuti (Zauxihu Ragapaw)",
-            month: "Marzo–Aprile",
+            month: "Maio",
+            arch: "Em maio, a constelação surge no quadrante Nordeste ao anoitecer, tornando-se mais elevada entre 21h00 e 0h00. Pode ser enquadrada por janela vertical orientada a Nordeste ou por pátio interno que permita maior ângulo de visão zenital. Entre 0h00 e 3h00 desloca-se para Noroeste, sendo possível observá-la através de aberturas superiores ou varandas abertas voltadas a Norte.",
+            drawing: [1, 4, 5],
         },
-        { id: "ema", title: "Ema (Guirá Nhandú)", month: "Marzo–Aprile" },
+        {
+            id: "ema",
+            title: "Ema (Guirá Nhandú)",
+            month: "Maio-Junho",
+            arch: "Entre maio e junho, a constelação torna-se visível ao anoitecer no quadrante Sudeste, alcançando maior presença entre 20h00 e 23h30. Recomenda-se varanda profunda ou abertura vertical orientada a Sudeste, permitindo acompanhar sua extensão no céu austral. Quando próxima ao horizonte, entre 19h00 e 20h00, pode ser enquadrada por janela horizontal baixa voltada a Sudeste ou Sul, desde que o relevo local não ultrapasse a linha visual inferior. Entre 23h30 e 2h00 atinge posição mais elevada, sendo mais adequada a observação através de pátio interno amplo.",
+            drawing: [1, 4, 5, 3, 6],
+        },
         {
             id: "homenvelho",
             title: "Homem Velho (Tuiváe)",
-            month: "Marzo–Aprile",
+            month: "Dezembro",
+            arch: "Durante o mês de dezembro, a constelação surge no quadrante Leste entre 19h00 e 20h00, podendo ser enquadrada por janela horizontal baixa orientada a Leste, valorizando sua emergência no horizonte, desde que não haja obstrução topográfica significativa. Entre 21h00 e 2h00 atinge maior elevação, sendo mais adequada a janela vertical alta, pórtico ou pátio interno. A partir das 4h00, já em deslocamento para Oeste, volta a permitir enquadramento por abertura baixa voltada a Oeste.",
+            drawing: [1, 2, 3, 6],
         },
-        { id: "pleiade", title: "Plêiades (Seichú)", month: "Marzo–Aprile" },
+        {
+            id: "pleiade",
+            title: "Plêiades (Seichú)",
+            month: "Novembro",
+            arch: "Em novembro, a constelação surge no quadrante Leste a partir das 19h30–20h00, tornando-se mais elevada entre 22h00 e 1h00. Pode ser enquadrada por janela vertical alta orientada a Leste ou por abertura zenital controlada, valorizando sua configuração compacta. Após 2h00 desloca-se para Oeste, sendo observável por pátio interno ou aberturas voltadas a Noroeste.",
+            drawing: [1, 4, 5],
+        },
     ];
 
     let activeIndex = 0;
@@ -223,7 +247,7 @@
                     canvas.width = 256;
                     canvas.height = 128;
                     const ctx = canvas.getContext("2d");
-                    ctx.fillStyle = "#ffffff";
+                    ctx.fillStyle = "#9ea7e5";
                     ctx.font = "bold 36px Arial";
                     ctx.textAlign = "center";
                     ctx.textBaseline = "middle";
@@ -335,7 +359,7 @@
             },
             undefined,
             (error) => {
-                console.error("Errore nel caricamento modello:", error);
+                console.error("Error", error);
             },
         );
 
@@ -357,7 +381,7 @@
         const globe = new THREE.Mesh(
             new THREE.SphereGeometry(radius, 64, 64),
             new THREE.MeshBasicMaterial({
-                color: 0x666666,
+                color: 0x61581a,
                 wireframe: true,
                 transparent: true,
                 opacity: 0.1,
@@ -377,7 +401,7 @@
                 { name: "δ Cru", ra: 12.2524, dec: -58.7489 },
                 { name: "ε Cru", ra: 12.37, dec: -60.1 },
             ],
-            0xff4500,
+            0x9ea7e5,
             new Date("2026-04-01T18:00:00"),
         );
 
@@ -390,7 +414,7 @@
                 { name: "δ Crv", ra: 12.4977, dec: -16.5154 },
                 { name: "ε Crv", ra: 12.1687, dec: -22.6198 },
             ],
-            0xff4500,
+            0x9ea7e5,
             new Date("2026-03-25T18:00:00"),
         );
 
@@ -405,7 +429,7 @@
                 { name: "ι CrB", ra: 15.9468, dec: 29.6159 },
                 { name: "θ CrB", ra: 16.024, dec: 31.6031 },
             ],
-            0xff4500,
+            0x9ea7e5,
             new Date("2026-05-15T18:00:00"),
         );
 
@@ -426,7 +450,7 @@
                 { name: "ζ Lup", ra: 15.2048, dec: -52.0991 },
                 { name: "γ Lup", ra: 15.5857, dec: -41.1667 },
             ],
-            0xff4500,
+            0x9ea7e5,
             new Date("2026-06-01T18:00:00"),
         );
 
@@ -447,7 +471,7 @@
                 { name: "α Tau", ra: 4.5987, dec: 16.5093 }, // Aldebaran
                 { name: "M45", ra: 3.7923, dec: 24.1051 }, // Pleiadi
             ],
-            0xff4500,
+            0x9ea7e5,
             new Date("2026-12-15T18:00:00"),
         );
 
@@ -462,7 +486,7 @@
                 { name: "23 Tau", ra: 3.7794, dec: 23.9483 },
                 { name: "25 Tau", ra: 3.7904, dec: 24.1051 },
             ],
-            0xff4500,
+            0x9ea7e5,
             new Date("2026-11-15T18:00:00"),
         );
 
@@ -470,7 +494,7 @@
 
         function animate() {
             animationId = requestAnimationFrame(animate);
-            scene.rotation.y += 0.001;
+            scene.rotation.y += 0.01;
             renderer.render(scene, camera);
         }
         animate();
@@ -495,15 +519,31 @@
 
     <div class="info" style="--sections:{sections.length}">
         <div class="info-content">
-            <h3>Colônia de Una, Bahia</h3>
             <p>
-                Lat {latitude.toFixed(3)}°, Lon {longitude.toFixed(3)}°
+                Colônia de Una, Bahia ✤ Lat {latitude.toFixed(3)}°, Lon {longitude.toFixed(
+                    3,
+                )}°
             </p>
             <h2>{sections[activeIndex]?.title}</h2>
-            <!-- <p>Mese ideale: {sections[activeIndex]?.month}</p> -->
+            <p style="">
+                Aparição e melhor época de observação: {sections[activeIndex]
+                    ?.month}
+            </p>
+            <div
+                style="height:20px;border-bottom: #8e8b8b 1px solid;padding-bottom:10px;width:50%;text-align: center;margin:auto"
+            ></div>
+            <p style="font-size: 0.9em;padding:30px">
+                {sections[activeIndex]?.arch}
+            </p>
 
-            <div class="svg-container">
-                <!-- <FinestraSVG /> -->
+            <div class="drawing-container">
+                {#each sections[activeIndex]?.drawing ?? [] as img}
+                    <img
+                        src={`${import.meta.env.BASE_URL}img/${img}.png`}
+                        alt={`drawing-${img}`}
+                        class="drawing-image"
+                    />
+                {/each}
             </div>
         </div>
 
@@ -562,6 +602,25 @@
 
     .scroll-section {
         height: 100vh;
+    }
+
+    .drawing-container {
+        margin-top: 1.5rem;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .drawing-image {
+        width: auto;
+        height: 150px;
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .drawing-image:hover {
+        transform: scale(1.05);
     }
 
     .svg-container {
