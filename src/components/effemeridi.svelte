@@ -527,5 +527,7 @@
     }
     .canvas-container select {
         font-family: "Gabarito", sans-serif;
+        color: #9ea7e5;
+        background-color: #020414;
     }
 </style>

@@ -6,6 +6,8 @@
     import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
     // import FinestraSVG from './finestra.svg?component';
 
+    export let globeStart = 0;
+
     let container;
     const latitude = -15.263;
     const longitude = -39.145;
@@ -289,8 +291,14 @@
 
     function handleScroll() {
         const sectionHeight = window.innerHeight;
-        let index = Math.floor(window.scrollY / sectionHeight);
+        const relativeScroll = window.scrollY - globeStart;
+
+        if (relativeScroll < 0) return;
+
+        let index = Math.floor(relativeScroll / sectionHeight);
+
         index = Math.max(0, Math.min(sections.length - 1, index));
+
         if (index !== activeIndex) {
             activeIndex = index;
             updateConstellation();
@@ -520,9 +528,10 @@
     <div class="info" style="--sections:{sections.length}">
         <div class="info-content">
             <p>
-                Colônia de Una, Bahia ✤ Lat {latitude.toFixed(3)}°, Lon {longitude.toFixed(
+                <!--  Colônia de Una, Bahia ✤ Lat {latitude.toFixed(3)}°, Lon {longitude.toFixed(
                     3,
-                )}°
+                )}° -->
+                Colônia de Una, Bahia ✤ Escala de Bortle: 3-5
             </p>
             <h2>{sections[activeIndex]?.title}</h2>
             <p style="">
@@ -530,7 +539,7 @@
                     ?.month}
             </p>
             <div
-                style="height:20px;border-bottom: #8e8b8b 1px solid;padding-bottom:10px;width:50%;text-align: center;margin:auto"
+                style="height:20px;border-bottom: #9ea7e5 1px solid;padding-bottom:10px;width:50%;text-align: center;margin:auto"
             ></div>
             <p style="font-size: 0.9em;padding:30px">
                 {sections[activeIndex]?.arch}
@@ -632,5 +641,25 @@
     body {
         margin: 0;
         background: #020414;
+    }
+
+    @media (max-width: 768px) {
+        .layout {
+            display: grid;
+            grid-template-columns: 50% 50%;
+        }
+
+        .info-content {
+            font-size: 0.8em;
+            top: 1%;
+        }
+
+        .info-content p {
+            padding: 2px !important;
+        }
+
+        .drawing-container {
+            display: none;
+        }
     }
 </style>

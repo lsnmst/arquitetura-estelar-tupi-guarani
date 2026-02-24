@@ -8,16 +8,102 @@
 
   let effemeridi = [];
 
+  let globeSection;
+  let globeStart = 0;
+
   onMount(() => {
     effemeridi = Papa.parse(rawData, {
       header: true,
       skipEmptyLines: true,
       comments: "#",
     }).data;
+
+    globeStart = globeSection.offsetTop;
   });
 </script>
 
-<ScrollGlobe />
+<div class="header-chapter mob">
+  <p>
+    Este protótipo imagina explorar como a arquitetura rural tradicional pode
+    dialogar com o céu noturno, transformando a observação das estrelas em um
+    elemento estrutural e ritual do habitar
+  </p>
+</div>
+<div class="header-chapter">
+  <h2>Arquitetura que respira vento e observa constelações</h2>
+</div>
+<div class="header-chapter">
+  <h2>Habitar ao ritmo do céu</h2>
+</div>
+
+<div class="chapter" style="height: 60vh;">
+  <p>
+    Inspirado nas práticas e pesquisas sobre astronomia cultural do <a
+      href="https://observatorioseichu.com.br/"
+      target="_blank">Observatório Astronômico Seichú</a
+    >, juntamente com a artista e astrônoma indígena Maybí Machacalis, e à
+    arquitetura, design e planejamento rural ecológico da
+    <a href="https://nayalves.com/" target="_blank">Nay Alves</a>, este trabalho
+    relaciona as orientações, os princípios bioclimáticos e as tipologias
+    espaciais da casa rural tradicional com as formas como a tradição
+    Tupi-Guarani observa e nomeia as constelações, marcando o tempo e as
+    estações de acordo com os movimentos do céu. A orientação bioclimática
+    tradicional integra-se com a cosmopercepção cultural do céu.
+  </p>
+</div>
+
+<div class="header-chapter mini">
+  <h3>
+    Costurando a estratificação cultural entre a arquitetura colonial e a
+    cultura indígena estelar
+  </h3>
+  <p>
+    As casas rurais tradicionais da Colônia de Una derivam da cultura material
+    colonial e do século XIX, enquanto as referências celestes se inspiram no
+    conhecimento astronômico dos povos Tupi-Guarani, que habitavam a faixa
+    costeira séculos antes da chegada dos europeus. A combinação no projeto não
+    pretende representar uma continuidade histórica direta, mas sim um diálogo
+    simbólico entre a arquitetura tradicional e os conhecimentos ancestrais.
+  </p>
+</div>
+
+<div class="header-chapter">
+  <h3>órbitas que desenham a casa</h3>
+</div>
+<div class="header-chapter">
+  <p>
+    As constelações Tupi-Guarani não são aqui representações simbólicas, mas
+    trajetórias calculadas a partir da ascensão reta e da declinação,
+    convertidas em altitude e azimute para a latitude da Colônia de Una, Bahia.
+    Entre as 18h e as 6h, cada estrela descreve um arco no céu; esses arcos
+    tornam-se diagramas espaciais. O scroll organiza o tempo como estação: março
+    revela a Pata da Ema ao sudeste; maio eleva o Jabuti ao nordeste; dezembro
+    traz o Homem Velho emergindo do horizonte leste. Cada movimento sugere um
+    tipo de abertura (janela alta, varanda profunda, pátio interno, abertura
+    zenital), como dispositivos de enquadramento do firmamento. A ventilação
+    cruzada, a orientação solar e os vazios internos dialogam com as órbitas
+    noturnas, integrando arquitetura tradicional e astronomia cultural.
+
+    <br /><br />
+    Os cálculos das órbitas das constelações assumem um horizonte livre: relevos
+    ou edifícios com até 5 m de altura devem estar a pelo menos 500 m do observador
+    para que o horizonte aparente permaneça coerente e os dados continuem confiáveis
+    para a análise astronômica. Portanto, é preferível um terreno aberto, levemente
+    elevado em direção ao sudoeste, com livre acesso visual ao nordeste e ao sul.
+    Uma localização em uma colina baixa com vista livre para o sul e sudoeste permite
+    combinar ventilação natural e observação noturna.
+
+    <br /><br />
+    Colônia de Una, Bahia, apesar de não ser um local astronômico com visibilidade
+    estelar ideal, oferece condições de céu noturno significativamente melhores do
+    que as áreas urbanas para a observação das constelações incluídas no projeto.
+    Essas condições se prestam a ser parte integrante do projeto arquitetônico.
+  </p>
+</div>
+
+<div class="globe-section" bind:this={globeSection}>
+  <ScrollGlobe {globeStart} />
+</div>
 
 <div class="chapter">
   <p>
@@ -64,11 +150,67 @@
   </div>
 </div>
 
+<div class="header-chapter">
+  <h3>Diagrama sinóptico com as efemérides estelares</h3>
+</div>
+<div class="header-chapter" style="margin-bottom: 5em;">
+  <p>
+    Para cada constelação, a ascensão reta e a declinação são convertidas em
+    altitude e azimute em relação às coordenadas de Colônia de Una, Bahia, na
+    data de suas efemérides. O sistema identifica o horário noturno em que toda
+    a constelação ultrapassa o limite mínimo de visibilidade acima do horizonte,
+    garantindo a coerência com as condições observáveis reais. O resultado é um
+    quadro comparativo que permite verificar a altura relativa das constelações
+    (baixa, média, alta); comparar os azimutes de ascensão e posição culminante;
+    ler as diferenças sazonais no mesmo sistema espacial; traduzir os vetores
+    estelares em orientações arquitetônicas.
+  </p>
+</div>
+
 <Effemeridi />
 
 <div class="title-block">A luz das estrelas no projeto arquitetônico</div>
 
 <style>
+  .header-chapter {
+    width: 100vw;
+    padding: 0 4em;
+    color: #9ea7e5;
+    font-size: 0.95rem;
+    font-family: "Gabarito", sans-serif;
+    border-bottom: #9ea7e5 1px solid;
+    font-weight: 200;
+    line-height: 1.4;
+  }
+  .header-chapter p {
+    margin-block-start: 0.5rem;
+    margin-block-end: 0.5rem;
+  }
+  .header-chapter h2 {
+    font-size: 4em;
+    text-transform: uppercase;
+    line-height: 1em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-fill-color: #ffffff00;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #9ea7e5;
+    margin-block-start: 1rem;
+    margin-block-end: 1rem;
+  }
+  .header-chapter h3 {
+    font-size: 2.8em;
+    text-transform: uppercase;
+    line-height: 1em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-fill-color: #ffffff00;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #9ea7e5;
+    margin-block-start: 1rem;
+    margin-block-end: 1rem;
+  }
+
   .chapter {
     margin: 5em 0;
     width: 100vw;
@@ -126,5 +268,34 @@
     letter-spacing: 0.05em;
     z-index: 20;
     border-top: 1px solid #8e8b8b50;
+  }
+
+  .mini {
+    height: 30vh;
+  }
+
+  @media (max-width: 768px) {
+    .header-chapter h2 {
+      font-size: 2em;
+    }
+
+    .header-chapter h3 {
+      font-size: 1.5em;
+    }
+
+    .mini {
+      height: 80vh;
+    }
+
+    .mob {
+      font-size: 0.8em;
+    }
+
+    .title-block {
+      font-size: 1.1em;
+      line-height: 1;
+      padding: 10px 0;
+      background-color: #020414;
+    }
   }
 </style>
