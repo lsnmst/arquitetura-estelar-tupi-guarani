@@ -4,6 +4,7 @@
 
   import ScrollGlobe from "./components/ScrollGlobe.svelte";
   import Effemeridi from "./components/effemeridi.svelte";
+  import SolarObservatory from "./components/SolarObservatory.svelte";
   import rawData from "./csv/stars.csv?raw";
 
   let effemeridi = [];
@@ -24,7 +25,7 @@
 
 <div class="header-chapter mob">
   <p>
-    Este protótipo imagina explorar como a arquitetura rural tradicional pode
+    Este projeto imagina explorar como a arquitetura rural tradicional pode
     dialogar com o céu noturno, transformando a observação das estrelas em um
     elemento estrutural e ritual do habitar
   </p>
@@ -36,7 +37,7 @@
   <h2>Habitar ao ritmo do céu</h2>
 </div>
 
-<div class="chapter" style="height: 60vh;">
+<div class="chapter ottanta" style="border-bottom: #9ea7e5 1px solid;">
   <p>
     Inspirado nas práticas e pesquisas sobre astronomia cultural do <a
       href="https://observatorioseichu.com.br/"
@@ -50,12 +51,9 @@
     estações de acordo com os movimentos do céu. A orientação bioclimática
     tradicional integra-se com a cosmopercepção cultural do céu.
   </p>
-</div>
-
-<div class="header-chapter mini">
   <h3>
     Costurando a estratificação cultural entre a arquitetura colonial e a
-    cultura indígena estelar
+    cultura indígena (estelar)
   </h3>
   <p>
     As casas rurais tradicionais da Colônia de Una derivam da cultura material
@@ -66,6 +64,32 @@
     simbólico entre a arquitetura tradicional e os conhecimentos ancestrais.
   </p>
 </div>
+
+<div class="header-chapter" style="border-bottom: none;">
+  <h3>Kûarasy Ra' angaba.<br />Marcar o Sol, Orientar a Casa</h3>
+  <p>
+    O Kûarasy Ra'angaba é um dispositivo de leitura solar: acompanha a variação
+    das sombras ao longo do ano, marcando solstícios, equinócios e a passagem
+    zenital do Sol. Tecnologia milenar dos povos Tupi-Guarani, hoje reativada em
+    <a href="https://observatorioseichu.com.br/oficinas/" target="_blank"
+      >oficinas do Observatório Astronômico Seichú</a
+    >, constitui uma forma construída de orientação que integra céu, corpo e
+    território. Assim como a arquitetura bioclimática utiliza o percurso solar
+    para definir aberturas, proteções e ventilações, o observatório solar é um
+    instrumento que organiza o espaço a partir do movimento do céu. Este projeto
+    prolonga essa lógica para o período noturno, traduzindo os arcos estelares
+    das constelações Tupi-Guarani em dispositivos espaciais da casa rural.
+  </p>
+
+  <!--   
+  <button
+    >Agende uma Oficina Kûarasy Ra’angaba – Observatório Solar Indígena. Clique
+    aqui</button
+  >
+ -->
+</div>
+
+<SolarObservatory />
 
 <div class="header-chapter">
   <h3>órbitas que desenham a casa</h3>
@@ -172,6 +196,16 @@
 <div class="title-block">A luz das estrelas no projeto arquitetônico</div>
 
 <style>
+  button {
+    background: #9ea7e5;
+    color: #020414;
+  }
+  button:hover {
+    background: #020414;
+    color: #9ea7e5;
+    border-color: #9ea7e5;
+  }
+
   .header-chapter {
     width: 100vw;
     padding: 0 4em;
@@ -220,6 +254,18 @@
     font-family: "Gabarito", sans-serif;
     font-weight: 200;
     line-height: 1.6;
+  }
+  .chapter h3 {
+    font-size: 2.8em;
+    text-transform: uppercase;
+    line-height: 1em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-fill-color: #ffffff00;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #9ea7e5;
+    margin-block-start: 1rem;
+    margin-block-end: 1rem;
   }
 
   .table-container {
@@ -274,12 +320,20 @@
     height: 30vh;
   }
 
+  .ottanta {
+    height: 80vh;
+  }
+
   @media (max-width: 768px) {
     .header-chapter h2 {
       font-size: 2em;
     }
 
     .header-chapter h3 {
+      font-size: 1.5em;
+    }
+
+    .chapter h3 {
       font-size: 1.5em;
     }
 
@@ -296,6 +350,10 @@
       line-height: 1;
       padding: 10px 0;
       background-color: #020414;
+    }
+
+    .ottanta {
+      height: unset;
     }
   }
 </style>
