@@ -5,6 +5,7 @@
   import ScrollGlobe from "./components/ScrollGlobe.svelte";
   import Effemeridi from "./components/effemeridi.svelte";
   import SolarObservatory from "./components/SolarObservatory.svelte";
+  import BoxSVG from "./components/BoxSVG.svelte";
   import rawData from "./csv/stars.csv?raw";
 
   let effemeridi = [];
@@ -128,6 +129,22 @@
 <div class="globe-section" bind:this={globeSection}>
   <ScrollGlobe {globeStart} />
 </div>
+
+<div class="chapter">
+  <p>
+    Estes diagramas se relacionam de forma direta com os princípios
+    bioclimáticos da arquitetura rural tradicional. A orientação do Sol ao longo
+    do dia orienta a localização de janelas, varandas e elementos que projetam
+    sombra, garantindo conforto térmico natural. Da mesma forma, a ventilação
+    cruzada e os espaços internos vazios são pensados considerando os ventos
+    predominantes, que aqui são representados pelos arcos de direção do vento.
+    Nesse contexto, os arcos estelares e solares passam a funcionar como
+    verdadeiros guias espaciais, indicando posicionamentos e relações entre os
+    elementos da casa em diálogo com o céu.
+  </p>
+</div>
+
+<BoxSVG />
 
 <div class="chapter">
   <p>
