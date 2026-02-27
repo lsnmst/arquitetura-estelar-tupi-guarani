@@ -5,6 +5,7 @@
   import ScrollGlobe from "./components/ScrollGlobe.svelte";
   import Effemeridi from "./components/effemeridi.svelte";
   import SolarObservatory from "./components/SolarObservatory.svelte";
+  import StarsBackground from "./components/StarsBackground.svelte";
   import BoxSVG from "./components/BoxSVG.svelte";
   import rawData from "./csv/stars.csv?raw";
 
@@ -37,6 +38,8 @@
 <div class="header-chapter">
   <h2>Habitar ao ritmo do céu</h2>
 </div>
+
+<StarsBackground />
 
 <div class="chapter ottanta" style="border-bottom: #9ea7e5 1px solid;">
   <p>
