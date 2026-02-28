@@ -11,7 +11,6 @@
 
     let scene, camera, renderer, animationId;
 
-    /* ====== FUNZIONI ASTROMETRICHE ====== */
     function raDecToAltAz(raHours, decDeg, latDeg, lonDeg, date = new Date()) {
         const toRad = (deg) => (deg * Math.PI) / 180;
         const toDeg = (rad) => (rad * 180) / Math.PI;
@@ -51,7 +50,6 @@
         };
     }
 
-    /* ====== STELLE PATA DA EMA ====== */
     const stars = [
         { name: "α Cen", ra: 14.6601, dec: -60.8339 },
         { name: "β Cen", ra: 14.0637, dec: -60.373 },
@@ -68,7 +66,6 @@
         { name: "γ Lup", ra: 15.5857, dec: -41.1667 },
     ];
 
-    /* ====== DATE PERIODO IDEALE ====== */
     const dates = [
         // new Date("2026-03-01T18:00:00"),
         new Date("2026-06-01T18:00:00"),
@@ -152,10 +149,10 @@
         };
 
         // Assi
-        createAxis(new THREE.Vector3(0, 0, -1), 0xffffff); // Nord
-        createAxis(new THREE.Vector3(1, 0, 0), 0x777777); // Est
-        createAxis(new THREE.Vector3(0, 0, 1), 0x777777); // Sud
-        createAxis(new THREE.Vector3(-1, 0, 0), 0x777777); // Ovest
+        createAxis(new THREE.Vector3(0, 0, -1), 0xffffff); // N
+        createAxis(new THREE.Vector3(1, 0, 0), 0x777777); // L
+        createAxis(new THREE.Vector3(0, 0, 1), 0x777777); // S
+        createAxis(new THREE.Vector3(-1, 0, 0), 0x777777); // O
 
         // Label Nord
         const canvas = document.createElement("canvas");
@@ -174,7 +171,7 @@
         const sprite = new THREE.Sprite(spriteMaterial);
 
         sprite.scale.set(15, 15, 1);
-        sprite.position.set(0, 5, -length - 5); // leggermente oltre l'asse nord
+        sprite.position.set(0, 5, -length - 5);
 
         axesGroup.add(sprite);
 
@@ -203,7 +200,7 @@
         function createVerticalAxis(length = 100) {
             const group = new THREE.Group();
 
-            // linea zenit
+            // zenit
             const material = new THREE.LineBasicMaterial({ color: 0xffffff });
             const geometry = new THREE.BufferGeometry().setFromPoints([
                 new THREE.Vector3(0, 0, 0),
@@ -213,7 +210,7 @@
             const line = new THREE.Line(geometry, material);
             group.add(line);
 
-            // sfera zenit
+            // sphere zenit
             const sphere = new THREE.Mesh(
                 new THREE.SphereGeometry(0, 0, 0),
                 new THREE.MeshBasicMaterial({ color: 0x00ffff }),
@@ -228,7 +225,7 @@
 
         const archetype = new THREE.Mesh(
             new THREE.BoxGeometry(0, 0, 0),
-            new THREE.MeshStandardMaterial({ color: 0xffffff, visible: false }), // invisibile, ma mantiene la logica
+            new THREE.MeshStandardMaterial({ color: 0xffffff, visible: false }),
         );
         archetype.position.y = 5;
         scene.add(archetype);
@@ -238,9 +235,9 @@
             import.meta.env.BASE_URL + "model/estrelar.glb",
             (gltf) => {
                 const model = gltf.scene;
-                model.scale.set(0.04, 0.04, 0.04); // regola scala secondo il modello
-                model.position.set(-5, -5, 20); // relativo al cubo
-                archetype.add(model); // il modello segue il cubo
+                model.scale.set(0.04, 0.04, 0.04);
+                model.position.set(-5, -5, 20);
+                archetype.add(model);
             },
             undefined,
             (error) => {
@@ -260,12 +257,10 @@
         );
         scene.add(globe);
 
-        // orbite + stelle
         dates.forEach((date, i) => {
             stars.forEach((star, starIdx) => {
                 const points = generateOrbit(star, date);
 
-                // linea dell’orbita
                 const geometry = new THREE.BufferGeometry().setFromPoints(
                     points,
                 );
@@ -276,10 +271,8 @@
                 });
                 scene.add(new THREE.Line(geometry, material));
 
-                // aggiungi sfere a TUTTE le stelle
                 points.forEach((p, idx) => {
                     if (idx % 4 === 0) {
-                        // perché step = 0.25h, ogni 4 step = 1 ora
                         const sphere = new THREE.Mesh(
                             new THREE.SphereGeometry(0.4, 16, 16),
                             new THREE.MeshBasicMaterial({ color: 0xff4500 }),
@@ -289,7 +282,6 @@
                     }
                 });
 
-                // aggiungi label solo alla prima stella
                 if (starIdx === 0 && points.length > 0) {
                     const startPoint = points[0]; // 18:00
                     const endPoint = points[points.length - 1]; // 6:00
@@ -325,10 +317,8 @@
             });
         });
 
-        // cerchi altitudine
         scene.add(createAltitudeCircles(radius, 5));
 
-        // camera ortografica isometrica
         const aspect = container.clientWidth / container.clientHeight;
         const frustumSize = 200;
         camera = new THREE.OrthographicCamera(
@@ -347,7 +337,6 @@
         renderer.setSize(container.clientWidth, container.clientHeight);
         container.appendChild(renderer.domElement);
 
-        // OrbitControls
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enabled = true;
         controls.enableZoom = false;

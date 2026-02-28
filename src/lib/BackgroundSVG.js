@@ -13,8 +13,32 @@ export function generateStarBackgroundSVG(stars, width, height, raOffset = 0) {
         return d + sign * (m / 60 + s / 3600);
     }
 
+    function hashString(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        return hash;
+    }
+
+    function constellationColor(name) {
+        const baseHue = 225;
+        const hueVariation = 35;
+        const lightnessBase = 65;
+
+        const hash = Math.abs(hashString(name));
+        const hueOffset = (hash % (hueVariation * 2)) - hueVariation;
+
+        const hue = baseHue + hueOffset;
+        const saturation = 60;
+        const lightness = lightnessBase + (hash % 10) - 5;
+
+        return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    }
+
     function project(raDeg, decDeg) {
-        const x = ((raDeg + raOffset) % 360) / 360 * width;
+        const wrappedRA = ((raDeg + raOffset) % 360 + 360) % 360;
+        const x = (wrappedRA / 360) * width;
         const y = ((90 - decDeg) / 180) * height;
         return [x, y];
     }
@@ -25,7 +49,7 @@ export function generateStarBackgroundSVG(stars, width, height, raOffset = 0) {
         if (ra == null || dec == null) return "";
 
         const [x, y] = project(ra, dec);
-        return `<circle cx="${x}" cy="${y}" r="1" fill="#9ea7e5" />`;
+        return `<circle cx="${x}" cy="${y}" r="1" fill="${constellationColor(s.constellation || '')}" />`;
     }).join("");
 
     return `

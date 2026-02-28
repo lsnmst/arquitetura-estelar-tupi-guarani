@@ -42,6 +42,10 @@
 <StarsBackground />
 
 <div class="chapter ottanta" style="border-bottom: #9ea7e5 1px solid;">
+  <h3>
+    Costurando a estratificação cultural entre a arquitetura colonial e a
+    cultura indígena (estelar)
+  </h3>
   <p>
     Inspirado nas práticas e pesquisas sobre astronomia cultural do <a
       href="https://observatorioseichu.com.br/"
@@ -49,23 +53,13 @@
     >, juntamente com a artista e astrônoma indígena Maybí Machacalis, e à
     arquitetura, design e planejamento rural ecológico da
     <a href="https://nayalves.com/" target="_blank">Nay Alves</a>, este trabalho
-    relaciona as orientações, os princípios bioclimáticos e as tipologias
-    espaciais da casa rural tradicional com as formas como a tradição
-    Tupi-Guarani observa e nomeia as constelações, marcando o tempo e as
-    estações de acordo com os movimentos do céu. A orientação bioclimática
-    tradicional integra-se com a cosmopercepção cultural do céu.
-  </p>
-  <h3>
-    Costurando a estratificação cultural entre a arquitetura colonial e a
-    cultura indígena (estelar)
-  </h3>
-  <p>
-    As casas rurais tradicionais da Colônia de Una derivam da cultura material
-    colonial e do século XIX, enquanto as referências celestes se inspiram no
-    conhecimento astronômico dos povos Tupi-Guarani, que habitavam a faixa
-    costeira séculos antes da chegada dos europeus. A combinação no projeto não
-    pretende representar uma continuidade histórica direta, mas sim um diálogo
-    simbólico entre a arquitetura tradicional e os conhecimentos ancestrais.
+    investiga, a partir do contexto rural da Colônia de Una, Bahia, as
+    correspondências entre os princípios bioclimáticos da casa rural tradicional
+    de formação colonial e o sistema de observação astronômica dos povos
+    Tupi-Guarani, tradição que marca o tempo e as estações segundo os movimentos
+    das constelações. Propõe-se que a orientação bioclimática vernácula e a
+    cosmopercepção Tupi-Guarani partilham uma lógica comum de organização do
+    espaço habitado a partir do céu.
   </p>
 </div>
 

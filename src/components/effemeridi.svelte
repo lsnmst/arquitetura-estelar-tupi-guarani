@@ -13,29 +13,21 @@
     let selectedConstellation = "";
 
     const seasonColors = {
-        Gennaio: 0xff3b3b, // rosso vivo
-        Marzo: 0xff8c00, // arancione
-        Aprile: 0xffd700, // giallo
-        Maggio: 0x32cd32, // verde
-        Giugno: 0x00bfff, // azzurro
-        Luglio: 0x1e90ff, // blu
-        Agosto: 0x4169e1, // blu intenso
-        Ottobre: 0x8a2be2, // viola
-        Novembre: 0xff1493, // magenta
-        Dicembre: 0xdc143c, // cremisi
+        Gennaio: 0xff3b3b,
+        Marzo: 0xff8c00,
+        Aprile: 0xffd700,
+        Maggio: 0x32cd32,
+        Giugno: 0x00bfff,
+        Luglio: 0x1e90ff,
+        Agosto: 0x4169e1,
+        Ottobre: 0x8a2be2,
+        Novembre: 0xff1493,
+        Dicembre: 0xdc143c,
     };
 
     const constellationColors = [
-        0xff6b6b, // rosso corallo
-        0xf7b267, // arancio sabbia
-        0xfdfd96, // giallo tenue
-        0x77dd77, // verde pastello
-        0x84b6f4, // azzurro
-        0x6a5acd, // blu violaceo
-        0xcbaacb, // lilla
-        0xffb7ce, // rosa
-        0xa0e7e5, // turchese chiaro
-        0xffdac1, // pesca
+        0xff6b6b, 0xf7b267, 0xfdfd96, 0x77dd77, 0x84b6f4, 0x6a5acd, 0xcbaacb,
+        0xffb7ce, 0xa0e7e5, 0xffdac1,
     ];
 
     function createAltitudeCircles(radius, stepDeg = 5, segments = 64) {
@@ -200,7 +192,6 @@
             0.1,
             500,
         );
-        // In onMount, dopo aver creato la camera:
         camera.position.set(120, 90, 120);
         camera.lookAt(new THREE.Vector3(0, 5, 0));
 
@@ -236,10 +227,10 @@
             };
 
             // Assi
-            createAxis(new THREE.Vector3(0, 0, -1), 0xffffff); // Nord
-            createAxis(new THREE.Vector3(1, 0, 0), 0x777777); // Est
-            createAxis(new THREE.Vector3(0, 0, 1), 0x777777); // Sud
-            createAxis(new THREE.Vector3(-1, 0, 0), 0x777777); // Ovest
+            createAxis(new THREE.Vector3(0, 0, -1), 0xffffff); // N
+            createAxis(new THREE.Vector3(1, 0, 0), 0x777777); // L
+            createAxis(new THREE.Vector3(0, 0, 1), 0x777777); // S
+            createAxis(new THREE.Vector3(-1, 0, 0), 0x777777); // O
 
             // Label Nord
             const canvas = document.createElement("canvas");
@@ -258,7 +249,7 @@
             const sprite = new THREE.Sprite(spriteMaterial);
 
             sprite.scale.set(15, 15, 1);
-            sprite.position.set(0, 5, -length - 10); // leggermente oltre l'asse nord
+            sprite.position.set(0, 5, -length - 10);
 
             axesGroup.add(sprite);
 
@@ -294,7 +285,7 @@
 
         const archetype = new THREE.Mesh(
             new THREE.BoxGeometry(0, 0, 0),
-            new THREE.MeshStandardMaterial({ color: 0xffffff, visible: false }), // invisibile, ma mantiene la logica
+            new THREE.MeshStandardMaterial({ color: 0xffffff, visible: false }),
         );
         archetype.position.y = 5;
         scene.add(archetype);
@@ -304,9 +295,9 @@
             import.meta.env.BASE_URL + "model/estrelar.glb",
             (gltf) => {
                 const model = gltf.scene;
-                model.scale.set(0.04, 0.04, 0.04); // regola scala secondo il modello
-                model.position.set(-5, -5, 20); // relativo al cubo
-                archetype.add(model); // il modello segue il cubo
+                model.scale.set(0.04, 0.04, 0.04);
+                model.position.set(-5, -5, 20);
+                archetype.add(model);
             },
             undefined,
             (error) => {
@@ -400,10 +391,10 @@
                 const star = intersects[0].object;
 
                 if (hoveredStar !== star) {
-                    // reset vecchio
+                    // reset
                     if (hoveredStar) hoveredStar.scale.set(1, 1, 1);
 
-                    // nuovo highlight
+                    // highlight
                     hoveredStar = star;
                     hoveredStar.scale.set(1.5, 1.5, 1.5);
                     container.style.cursor = "pointer";

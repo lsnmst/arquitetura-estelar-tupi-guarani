@@ -26,10 +26,9 @@
     let currentDayIndex = 0;
     let currentHour = 6;
 
-    const latitude = -15.263; // es. Bahia, Brasile
+    const latitude = -15.263;
     const longitude = -39.145;
 
-    // Punti stagionali fissi (x,z) sul cerchio, coerenti con il diagramma
     const seasonalPoints = [
         { name: "NSV", az: Math.PI / 2 - 0.4, color: 0x9ea7e5 },
         { name: "PSV", az: -Math.PI / 2 + 0.4, color: 0x9ea7e5 },
@@ -56,10 +55,8 @@
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         container.appendChild(renderer.domElement);
 
-        // luce ambientale
         scene.add(new THREE.AmbientLight(0xffffff, 0.2));
 
-        // luce direzionale simulante il sole
         sunLight = new THREE.DirectionalLight(0xffffff, 1);
         sunLight.castShadow = true;
         sunLight.shadow.mapSize.width = 1024;
@@ -72,7 +69,6 @@
         sunLight.shadow.camera.far = 200;
         scene.add(sunLight);
 
-        // piccola sfera per visualizzare il sole
         sunMesh = new THREE.Mesh(
             new THREE.SphereGeometry(0.5, 16, 16),
             new THREE.MeshBasicMaterial({ color: 0x020414 }),
@@ -105,7 +101,7 @@
             new THREE.CylinderGeometry(0.3, 0.3, 20),
             new THREE.MeshStandardMaterial({ color: 0x9ea7e5 }),
         );
-        gnomon.position.y = 10; // metà altezza per base su terra
+        gnomon.position.y = 10;
         gnomon.castShadow = true;
         scene.add(gnomon);
     }
@@ -185,7 +181,6 @@
             const x = RADIUS * Math.sin(p.az);
             const z = RADIUS * Math.cos(p.az);
 
-            // marker
             const marker = new THREE.Mesh(
                 new THREE.SphereGeometry(0.1, 16, 16),
                 new THREE.MeshStandardMaterial({ color: p.color }),
@@ -193,7 +188,6 @@
             marker.position.set(x, 0.2, z);
             scene.add(marker);
 
-            // linea al centro
             const lineGeom = new THREE.BufferGeometry().setFromPoints([
                 new THREE.Vector3(0, 0.2, 0),
                 new THREE.Vector3(x, 0.2, z),
@@ -201,7 +195,6 @@
             const lineMat = new THREE.LineBasicMaterial({ color: p.color });
             scene.add(new THREE.Line(lineGeom, lineMat));
 
-            // label
             const label = createLabel(p.name, "#9ea7e5");
             label.position.set(x + 0.5, 0.2, z + 0.5);
             scene.add(label);
@@ -228,57 +221,48 @@
         return sprite;
     }
 
-    // --- ANIMAZIONE OMBRA ---
+    // --- SHADOW ANIMATION ---
     let sunIndex = 0;
     function animateSun() {
         requestAnimationFrame(animateSun);
 
-        // Prendi il solstizio corrente
         const day = solstices[currentDayIndex];
 
-        // Calcola la posizione del Sole usando altezza e azimut realistica
         const pos = sunPositionSolstice(day.month, day.day, currentHour);
 
         sunLight.position.set(pos.x, pos.y, pos.z);
         sunLight.target.position.set(0, 0, 0);
         scene.add(sunLight.target);
 
-        // Aggiorna l’ora simulata
         currentHour += 0.05;
         if (currentHour > 18) {
-            // fine giornata simulata
-            currentHour = 6; // ricomincia alba
-            currentDayIndex = (currentDayIndex + 1) % solstices.length; // passa al solstizio successivo
+            currentHour = 6;
+            currentDayIndex = (currentDayIndex + 1) % solstices.length;
         }
 
         renderer.render(scene, camera);
     }
 
-    // Funzione helper per calcolare posizione del Sole
     function sunPositionSolstice(month, day, hour) {
         const deg2rad = Math.PI / 180;
         const latRad = latitude * deg2rad;
 
-        // Declinazione solare approssimata (in radianti)
         const decl =
             23.44 * Math.sin((2 * Math.PI * (284 + day)) / 365) * deg2rad;
 
-        // Angolo orario (H) in radianti
         const H = ((hour - 12) / 12) * Math.PI;
 
-        // Altitudine del Sole
         const altitude = Math.asin(
             Math.sin(latRad) * Math.sin(decl) +
                 Math.cos(latRad) * Math.cos(decl) * Math.cos(H),
         );
 
-        // Azimut del Sole
         const azimuth = Math.atan2(
             -Math.sin(H),
             Math.tan(decl) * Math.cos(latRad) - Math.sin(latRad) * Math.cos(H),
         );
 
-        const r = 50; // distanza del Sole dalla scena
+        const r = 50;
         const x = r * Math.cos(altitude) * Math.sin(azimuth);
         const y = r * Math.sin(altitude);
         const z = r * Math.cos(altitude) * Math.cos(azimuth);

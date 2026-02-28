@@ -17,7 +17,7 @@
         stroke-width="3"
     />
     <text x={cx + 70} y={spacingY + 5} fill="#9ea7e5" font-size="14"
-        >Arco estelar</text
+        >Arco de visibilidade estelar</text
     >
 
     <!-- Arco solare -->

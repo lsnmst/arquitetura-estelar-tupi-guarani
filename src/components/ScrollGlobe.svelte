@@ -63,10 +63,10 @@
     let activeIndex = 0;
     const constellationGroups = {};
 
-    // Tween per animare l'entrata del box
+    // Tween
     const infoX = tweened(100, { duration: 500, easing: cubicOut });
 
-    /* ================= ASTROMETRIA ================= */
+    /* ================= ASTROMETRIC ================= */
     function raDecToAltAz(raHours, decDeg, latDeg, lonDeg, date) {
         const toRad = (d) => (d * Math.PI) / 180;
         const toDeg = (r) => (r * 180) / Math.PI;
@@ -181,10 +181,10 @@
         };
 
         // Assi
-        createAxis(new THREE.Vector3(0, 0, -1), 0xffffff); // Nord
-        createAxis(new THREE.Vector3(1, 0, 0), 0x777777); // Est
-        createAxis(new THREE.Vector3(0, 0, 1), 0x777777); // Sud
-        createAxis(new THREE.Vector3(-1, 0, 0), 0x777777); // Ovest
+        createAxis(new THREE.Vector3(0, 0, -1), 0xffffff); // N
+        createAxis(new THREE.Vector3(1, 0, 0), 0x777777); // E
+        createAxis(new THREE.Vector3(0, 0, 1), 0x777777); // S
+        createAxis(new THREE.Vector3(-1, 0, 0), 0x777777); // O
 
         // Label Nord
         const canvas = document.createElement("canvas");
@@ -203,14 +203,14 @@
         const sprite = new THREE.Sprite(spriteMaterial);
 
         sprite.scale.set(15, 15, 1);
-        sprite.position.set(0, 5, -length - 5); // leggermente oltre l'asse nord
+        sprite.position.set(0, 5, -length - 5);
 
         axesGroup.add(sprite);
 
         scene.add(axesGroup);
     }
 
-    /* ================= COSTRUZIONE COSTELLAZIONE ================= */
+    /* ================= BUILD CONSTELLATION ================= */
     function buildConstellation(id, stars, color, date) {
         const group = new THREE.Group();
         group.visible = false;
@@ -218,7 +218,6 @@
         stars.forEach((star, starIdx) => {
             const points = generateOrbit(star, date);
 
-            // linea dell’orbita
             const geometry = new THREE.BufferGeometry().setFromPoints(points);
             const material = new THREE.LineBasicMaterial({
                 color,
@@ -227,7 +226,6 @@
             });
             group.add(new THREE.Line(geometry, material));
 
-            // sfere ogni ora
             points.forEach((p, idx) => {
                 if (idx % 4 === 0) {
                     const sphere = new THREE.Mesh(
@@ -239,7 +237,6 @@
                 }
             });
 
-            // label orari solo prima stella
             if (starIdx === 0 && points.length > 0) {
                 const startPoint = points[0];
                 const endPoint = points[points.length - 1];
@@ -284,8 +281,7 @@
         const key = sections[activeIndex]?.id;
         if (key) constellationGroups[key].visible = true;
 
-        // anima il box dall'alto a destra
-        infoX.set(-100); // parte fuori schermo a destra
+        infoX.set(-100);
         setTimeout(() => infoX.set(0), 50);
     }
 
@@ -351,7 +347,7 @@
 
         const archetype = new THREE.Mesh(
             new THREE.BoxGeometry(0, 0, 0),
-            new THREE.MeshStandardMaterial({ color: 0xffffff, visible: false }), // invisibile, ma mantiene la logica
+            new THREE.MeshStandardMaterial({ color: 0xffffff, visible: false }),
         );
         archetype.position.y = 5;
         scene.add(archetype);
@@ -361,9 +357,9 @@
             import.meta.env.BASE_URL + "model/estrelar.glb",
             (gltf) => {
                 const model = gltf.scene;
-                model.scale.set(0.04, 0.04, 0.04); // regola scala secondo il modello
-                model.position.set(-5, -5, 20); // relativo al cubo
-                archetype.add(model); // il modello segue il cubo
+                model.scale.set(0.04, 0.04, 0.04);
+                model.position.set(-5, -5, 20);
+                archetype.add(model);
             },
             undefined,
             (error) => {
@@ -399,7 +395,7 @@
 
         scene.add(createAltitudeCircles(radius, 5));
 
-        /* ====== COSTELLAZIONI ====== */
+        /* ====== COSTELLATIONS ====== */
         buildConstellation(
             "pata",
             [

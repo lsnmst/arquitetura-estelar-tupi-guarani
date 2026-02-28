@@ -2,11 +2,11 @@
 import SunCalc from 'suncalc';
 
 /**
- * Genera SVG della costellazione con arco stellare, arco solare realistico e freccia vento
+ * Generate SVG
  */
 export function generateConstellationSVG({
-    azMin, azMax,             // arco stellare
-    date,                     // data della costellazione
+    azMin, azMax,             // stellar arc
+    date,                     // date
     lat = -13.9, lon = -38.8, // Colônia de Una
     windAzMin, windAzMax,
     width = 400, height = 400
@@ -15,12 +15,10 @@ export function generateConstellationSVG({
     const cx = width / 2;
     const cy = height / 2;
 
-    // Calcolo archi solari realistici
     const times = SunCalc.getTimes(new Date(date), lat, lon);
     const sunriseAz = SunCalc.getPosition(times.sunrise, lat, lon).azimuth * 180 / Math.PI + 180;
     const sunsetAz = SunCalc.getPosition(times.sunset, lat, lon).azimuth * 180 / Math.PI + 180;
 
-    // Conversione polare -> SVG
     function polarToSVG(az, radius) {
         const rad = (az % 360) * Math.PI / 180;
         const x = cx + radius * Math.sin(rad);
@@ -28,7 +26,6 @@ export function generateConstellationSVG({
         return [x, y];
     }
 
-    // Punti cardinali
     const labels = [
         { az: 0, text: "N" },
         { az: 90, text: "L" },
@@ -43,15 +40,12 @@ export function generateConstellationSVG({
     }).join("\n");
 
 
-    // Arco stellare
     const [sx1, sy1] = polarToSVG(azMin, r);
     const [sx2, sy2] = polarToSVG(azMax, r);
 
-    // Arco solare
     const [sunx1, suny1] = polarToSVG(sunriseAz, r);
     const [sunx2, suny2] = polarToSVG(sunsetAz, r);
 
-    // Freccia vento (media)
     const [wx1, wy1] = polarToSVG(windAzMin, r + 10);
     const [wx2, wy2] = polarToSVG(windAzMax, r + 10);
 
@@ -65,7 +59,7 @@ export function generateConstellationSVG({
     <rect x="${cx - 10}" y="${cy - 25}" width="20" height="50" fill="#9ea7e5"/>
 
     <!-- Arco stellare -->
-    <path d="M ${sx1} ${sy1} A ${r} ${r} 0 0 1 ${sx2} ${sy2}" fill="none" stroke="#aac2d2" stroke-width="3"/>
+    <path d="M ${sx1} ${sy1} A ${r} ${r} 0 0 1 ${sx2} ${sy2}" fill="none" stroke="#aac2d2" stroke-width="4"/>
 
     <!-- Arco solare -->
     <path d="M ${sunx1} ${suny1} A ${r} ${r} 0 0 1 ${sunx2} ${suny2}" fill="none" stroke="#dac650" stroke-width="3" stroke-opacity="0.7"/>
