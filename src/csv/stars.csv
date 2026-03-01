@@ -1,7 +1,4 @@
-# Copyright (C) 2025 Seichú Astronomical Observatory
-# License: CC BY-NC 4.0 (Attribution-NonCommercial)
-# Data compiled for Tupi-Guarani Stellar Culture
-constellation,star,date,RA_hms,Dec_dms,mag
+constellation,star
 Estrela Vagalume (Uam-rana),α CMa,
 Estrela Tinguaçu (Tinguaçu),41 Ari,
 Pata da Ema (Nhandu pysá),α Cru β Cru γ Cru δ Cru,
